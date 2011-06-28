@@ -1,0 +1,19 @@
+This repo has utilities and an IRC chat bot for getting information from
+the world of warcraft API. As far as I know, the only API available is
+getting realm status but once they add more I'll add more here.
+
+Requirements
+* JDK 1.6 or higher
+* Maven 2.2.1
+
+How to build
+% mvn package
+
+How to run the WowBot for IRC
+% java -jar [jarfile] --hostname irc.host.com --channel #wow --port 6667 --username wowbot
+
+Wowbot commands
+* Realm Status
+    wowbot: rs crushridge
+    Realm{name='Crushridge', type=pvp, queue=false, status=true, slug='crushridge', population=medium}
+
