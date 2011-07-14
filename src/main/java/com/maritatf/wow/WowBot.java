@@ -3,8 +3,8 @@ package com.maritatf.wow;
  * @author fmaritato
  */
 
-import com.maritatf.wow.value.Realm;
-import com.maritatf.wow.value.RealmList;
+import com.maritatf.wow.value.*;
+import com.maritatf.wow.value.WowChar;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jibble.pircbot.IrcException;
@@ -13,10 +13,7 @@ import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.CmdLineException;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
@@ -79,7 +76,16 @@ public class WowBot extends PircBot {
     }
 
     private void sendCharacterInfo(String channel, String[] command) {
-        //To change body of created methods use File | Settings | File Templates.
+        if (command.length == 4) {
+            WowChar c = null;
+            try {
+                c = ArmoryUtil.getCharacterInfo(command[2], command[3]);
+                sendMessage(channel, c.toString());
+            }
+            catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
     }
 
     private void sendRealmStatus(String channel, String[] command) {

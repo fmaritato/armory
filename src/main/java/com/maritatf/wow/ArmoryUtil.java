@@ -3,10 +3,7 @@ package com.maritatf.wow;
  * @author fmaritato
  */
 
-import com.maritatf.wow.value.PopulationEnum;
-import com.maritatf.wow.value.PopulationEnumDeserializer;
-import com.maritatf.wow.value.Realm;
-import com.maritatf.wow.value.RealmList;
+import com.maritatf.wow.value.*;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
@@ -54,12 +51,18 @@ public class ArmoryUtil {
         throw new ArmoryException(json);
     }
 
-    public static String getCharacterInfo(String name, String realm) {
+    public static WowChar getCharacterInfo(String name, String realm) throws IOException {
         StringBuilder options = new StringBuilder();
         options.append("/").append(realm).append("/").append(name);
         String json = getFromArmory("character", options.toString());
-        // TODO: need to see what the output is going to be
-        return null;
+        if (log.isDebugEnabled()) {
+            log.debug(json);
+        }
+        WowChar toon = objectMapper.readValue(json, WowChar.class);
+        if (log.isDebugEnabled()) {
+            log.debug(toon.toString());
+        }
+        return toon;
     }
 
     public static String getGuildInfo(String name, String realm) {
