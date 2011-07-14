@@ -73,4 +73,17 @@ public class Guild {
     public void setRealm(String realm) {
         this.realm = realm;
     }
+
+    @Override
+    public String toString() {
+        return "Guild{" +
+               "achievementPoints=" + achievementPoints +
+               ", name='" + name + '\'' +
+               ", realm='" + realm + '\'' +
+               ", level=" + level +
+               ", members=" + members +
+               ", side=" + side +
+               ", lastModified=" + lastModified +
+               '}';
+    }
 }

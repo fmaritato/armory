@@ -96,4 +96,19 @@ public class WowChar {
     public void setWowClass(WowClass wowClass) {
         this.wowClass = wowClass;
     }
+
+    @Override
+    public String toString() {
+        return "WowChar{" +
+               "achievementPoints=" + achievementPoints +
+               ", name='" + name + '\'' +
+               ", realm='" + realm + '\'' +
+               ", level=" + level +
+               ", lastModified=" + lastModified +
+               ", thumbnail='" + thumbnail + '\'' +
+               ", race=" + race +
+               ", gender=" + gender +
+               ", wowClass=" + wowClass +
+               '}';
+    }
 }
