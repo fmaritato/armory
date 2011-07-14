@@ -52,9 +52,9 @@ public class ArmoryUtil {
     }
 
     public static WowChar getCharacterInfo(String name, String realm) throws IOException {
-        StringBuilder options = new StringBuilder();
-        options.append("/").append(realm).append("/").append(name);
-        String json = getFromArmory("character", options.toString());
+        StringBuilder command = new StringBuilder();
+        command.append("character").append("/").append(realm).append("/").append(name);
+        String json = getFromArmory(command.toString(), null);
         if (log.isDebugEnabled()) {
             log.debug(json);
         }
@@ -65,12 +65,18 @@ public class ArmoryUtil {
         return toon;
     }
 
-    public static String getGuildInfo(String name, String realm) {
-        StringBuilder options = new StringBuilder();
-        options.append("/").append(realm).append("/").append(name);
-        String json = getFromArmory("guild", options.toString());
-        // TODO: need to see what the output is going to be
-        return null;
+    public static Guild getGuildInfo(String name, String realm) throws IOException {
+        StringBuilder command = new StringBuilder();
+        command.append("guild").append("/").append(realm).append("/").append(name);
+        String json = getFromArmory(command.toString(), null);
+        if (log.isDebugEnabled()) {
+            log.debug(json);
+        }
+        Guild guild = objectMapper.readValue(json, Guild.class);
+        if (log.isDebugEnabled()) {
+            log.debug(guild.toString());
+        }
+        return guild;
     }
 
     public static String getFromArmory(String command, String options) {
