@@ -72,7 +72,16 @@ public class WowBot extends PircBot {
     }
 
     private void sendGuildInfo(String channel, String[] command) {
-        //To change body of created methods use File | Settings | File Templates.
+        if (command.length == 4) {
+            Guild guild = null;
+            try {
+                guild = ArmoryUtil.getGuildInfo(command[2], command[3]);
+                sendMessage(channel, guild.toString());
+            }
+            catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
     }
 
     private void sendCharacterInfo(String channel, String[] command) {
